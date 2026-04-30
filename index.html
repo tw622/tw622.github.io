@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio | Tyler Wu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(3deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(3deg); }
+        }
+    </style>
+</head>
+<body class="bg-[#f1f5f9] text-slate-800 font-sans">
+
+    <nav class="fixed w-full bg-[#f1f5f9]/80 backdrop-blur-md z-50 border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="text-xl font-bold tracking-tighter text-slate-900">Tyler<span class="text-blue-600">Wu</span></span>
+            <div class="hidden md:flex space-x-8 text-sm font-bold text-slate-600 uppercase tracking-widest">
+                <a href="#experience" class="hover:text-blue-600 transition">Experience</a>
+                <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
+                <a href="#contact" class="hover:text-blue-600 transition border-2 border-slate-800 px-4 py-1 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-40 pb-24 px-6 bg-gradient-to-b from-[#e2e8f0] to-[#f1f5f9]">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            
+            <div class="flex-1 order-2 md:order-1 text-center md:text-left">
+                <div class="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-widest text-blue-700 uppercase bg-blue-100 rounded-full">
+                    Graduating 2027
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-tight">
+                    Rutgers University <br><span class="text-slate-500">Accounting Student.</span>
+                </h1>
+                <p class="text-lg text-slate-600 max-w-xl leading-relaxed mb-10 mx-auto md:mx-0">
+                    An Accountant at Rutgers Business School. Dedicated to professional financial analysis and auditing.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-5">
+                    <a href="#contact" class="bg-slate-900 text-white px-10 py-4 rounded-full font-bold hover:bg-blue-600 transition-all shadow-xl shadow-slate-300">Start a Conversation</a>
+                    <a href="assets/resume.pdf" target="_blank" class="flex items-center gap-2 text-slate-900 px-10 py-4 rounded-full font-bold border-2 border-slate-300 hover:border-slate-900 transition-all">
+                        View Resume <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative order-1 md:order-2">
+                <div class="absolute -inset-4 bg-blue-200/50 rounded-full blur-2xl"></div>
+                <div class="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-2xl shadow-2xl border-4 border-white floating">
+                    <img 
+                        src="assets/ProfilePic.jpeg" 
+                        alt="Profile Picture" 
+                        class="w-full h-full object-cover"
+                        onerror="this.parentElement.innerHTML='<div class=\'flex justify-center items-center h-full bg-slate-200 text-slate-400\'><i class=\'fas fa-user text-6xl\'></i></div>';"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-24 bg-[#1e293b] text-slate-300 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-sm font-black tracking-[0.3em] text-blue-400 uppercase mb-12 text-center">Work Experience</h2>
+            
+            <div class="bg-[#334155]/30 p-8 rounded-2xl border border-slate-700">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-white tracking-tight uppercase">Manager</h3>
+                    <span class="text-slate-400 font-bold">2022 — 2025</span>
+                </div>
+                <p class="text-blue-400 font-semibold mb-4">Paris Baguette | Fort Lee, NJ</p>
+                <ul class="space-y-3 text-slate-400">
+                    <li class="flex gap-3"><span class="text-blue-500">▹</span> Managed operations and crews of up to 4 people and trained employees during that time.</li>
+                    <li><i class="fas fa-caret-right text-blue-500 mr-2"></i> Managed waste logs, scheduled orders, and managed inventory every day to ensure accuracy of information</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-24 bg-white px-6">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Education</h2>
+                <div class="space-y-8">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center text-blue-600">
+                            <i class="fas fa-graduation-cap text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-lg">Bachelors of Science in Accounting</p>
+                            <p class="text-slate-500">Rutgers University | GPA: 3.5 | Graduating 2027 </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center text-blue-600">
+                            <i class="fas fa-university text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-lg">Associates of Arts in Economics</p>
+                            <p class="text-slate-500">Bergen Community College | Graduated 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Technical Skills</h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-slate-100 border border-slate-200 px-4 py-2 rounded-lg font-bold text-slate-700">Accounting</span>
+                    <span class="bg-slate-100 border border-slate-200 px-4 py-2 rounded-lg font-bold text-slate-700">Microsoft Office</span>
+                    <span class="bg-slate-100 border border-slate-200 px-4 py-2 rounded-lg font-bold text-slate-700">Customer Service</span>
+                    <span class="bg-slate-100 border border-slate-200 px-4 py-2 rounded-lg font-bold text-slate-700">Time Management</span>
+                    <span class="bg-slate-100 border border-slate-200 px-4 py-2 rounded-lg font-bold text-slate-700">Leadership Experience</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-[#cbd5e1] px-6">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-5xl font-black text-slate-900 mb-6 tracking-tighter">Interested in Connecting?</h2>
+            <p class="text-slate-700 mb-12 text-lg font-medium">"Let's Connect"</p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="mailto:tw622@scarletmail.rutgers.edu" class="flex-1 bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+                    <i class="fas fa-envelope text-3xl text-blue-600 mb-4"></i>
+                    <p class="text-sm font-bold text-slate-800 uppercase tracking-widest">Email Me</p>
+                </a>
+                <a href="https://www.linkedin.com/in/tyler-wu-679585385/" target="_blank" class="flex-1 bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+                    <i class="fab fa-linkedin-in text-3xl text-blue-600 mb-4"></i>
+                    <p class="text-sm font-bold text-slate-800 uppercase tracking-widest">LinkedIn</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-slate-900 text-slate-500 text-center text-xs tracking-widest uppercase font-bold">
+        <p>&copy; 2026 Tyler Wu • BUILT FOR GITHUB PAGES</p>
+    </footer>
+
+</body>
+</html>
