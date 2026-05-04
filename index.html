@@ -125,35 +125,6 @@
         </div>
     </section>
 
-<section id="rune-calculator" class="py-24 bg-slate-900 text-white px-6">
-    <div class="max-w-3xl mx-auto bg-slate-800 p-10 rounded-3xl border border-slate-700 shadow-2xl">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Rune Cost Calculator</h2>
-            <p class="text-slate-400 text-sm uppercase tracking-widest font-bold">Due to my interest in the game Elden Ring, I've implemented a calculator to determine the number of runes needed to level up based on your current level</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 mb-8">
-            <div>
-                <label class="block text-xs font-black uppercase tracking-widest text-blue-400 mb-2">Current Level</label>
-                <input type="number" id="currentLvl" value="1" class="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition">
-            </div>
-            <div>
-                <label class="block text-xs font-black uppercase tracking-widest text-blue-400 mb-2">Target Level</label>
-                <input type="number" id="targetLvl" value="150" class="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition">
-            </div>
-        </div>
-
-        <button onclick="calculateRunes()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-xl uppercase tracking-widest transition-all mb-8 shadow-lg shadow-blue-900/20">
-            Calculate Rune Cost
-        </button>
-
-        <div id="resultArea" class="hidden border-t border-slate-700 pt-8 text-center">
-            <p class="text-slate-400 uppercase text-xs font-bold tracking-widest mb-1">Total Runes Required</p>
-            <h3 id="runeResult" class="text-4xl md:text-5xl font-black text-white">0</h3>
-        </div>
-    </div>
-</section>
-
     <section id="contact" class="py-24 bg-[#cbd5e1] px-6">
         <div class="max-w-2xl mx-auto text-center">
             <h2 class="text-5xl font-black text-slate-900 mb-6 tracking-tighter">Interested in Connecting?</h2>
@@ -175,49 +146,5 @@
     <footer class="py-12 bg-slate-900 text-slate-500 text-center text-xs tracking-widest uppercase font-bold">
         <p>&copy; 2026 Tyler Wu • BUILT FOR GITHUB PAGES</p>
     </footer>
-
-<script>
-async function calculateRunes() {
-    const resultArea = document.getElementById('resultArea');
-    const resultText = document.getElementById('runeResult');
-    
-    try {
-        // 1. Fetch from the specific 'assets' folder path
-        const response = await fetch('assets/runecalc.json');
-        
-        if (!response.ok) throw new Error("Could not load configuration");
-        
-        const config = await response.json();
-
-        // 2. Get User Inputs
-        const current = parseInt(document.getElementById('currentLvl').value);
-        const target = parseInt(document.getElementById('targetLvl').value);
-
-        if (target <= current) {
-            alert("Target level must be higher than current level!");
-            return;
-        }
-
-        // 3. Extract logic from JSON constants
-        const { scalingFactorX, baseConstant, exponent, levelOffset } = config.formula;
-        let totalRunes = 0;
-
-        // 4. Calculation Loop
-        for (let i = current; i < target; i++) {
-            let cost = ((scalingFactorX + baseConstant) * Math.pow((i + levelOffset), exponent)) + 1;
-            totalRunes += Math.floor(cost);
-        }
-
-        // 5. Success UI Update
-        resultArea.classList.remove('hidden');
-        resultText.innerText = totalRunes.toLocaleString();
-
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to load calculator data from assets folder.");
-    }
-}
-</script>
-
 </body>
 </html>
