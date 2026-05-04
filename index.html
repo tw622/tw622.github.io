@@ -46,11 +46,61 @@
                 <p class="text-lg text-slate-600 max-w-xl leading-relaxed mb-10 mx-auto md:mx-0">
                     An Accountant at Rutgers Business School. Dedicated to professional financial analysis and auditing.
                 </p>
+                
                 <div class="flex flex-wrap justify-center md:justify-start gap-5">
-                    <a href="#contact" class="bg-slate-900 text-white px-10 py-4 rounded-full font-bold hover:bg-blue-600 transition-all shadow-xl shadow-slate-300">Start a Conversation</a>
-                    <a href="assets/resume.pdf" target="_blank" class="flex items-center gap-2 text-slate-900 px-10 py-4 rounded-full font-bold border-2 border-slate-300 hover:border-slate-900 transition-all">
-                        View Resume <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
+    <a href="#contact" class="bg-slate-900 text-white px-8 py-4 rounded-full font-bold hover:bg-blue-600 transition-all shadow-xl shadow-slate-300">Start a Conversation</a>
+    
+    <button onclick="openRuneCalc()" class="bg-blue-100 text-blue-700 px-8 py-4 rounded-full font-bold hover:bg-blue-200 transition-all border-2 border-blue-200 cursor-pointer">
+        <i class="fas fa-calculator mr-2"></i> Rune Calculator
+    </button>
+
+    <a href="assets/resume.pdf" target="_blank" class="flex items-center gap-2 text-slate-900 px-8 py-4 rounded-full font-bold border-2 border-slate-300 hover:border-slate-900 transition-all">
+        View Resume <i class="fas fa-arrow-right text-sm"></i>
+    </a>
+</div>
+
+<div id="runeModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl relative border border-slate-200">
+        <button onclick="closeRuneCalc()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-black text-slate-900 tracking-tighter uppercase">Rune Calculator</h2>
+            <p class="text-blue-600 text-[10px] font-bold uppercase tracking-widest mt-1">Elden Ring Leveling Tool</p>
+        </div>
+
+        <div class="space-y-5 mb-8">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-slate-500 mb-2 tracking-widest">Current Level</label>
+                    <input type="number" id="runeCurr" value="1" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 outline-none focus:border-blue-500 transition-all font-bold">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-slate-500 mb-2 tracking-widest">Target Level</label>
+                    <input type="number" id="runeTarget" value="150" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 outline-none focus:border-blue-500 transition-all font-bold">
+                </div>
+            </div>
+        </div>
+
+        <button onclick="calculateRuneInvestment()" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-blue-600 transition-all shadow-lg shadow-blue-200 uppercase tracking-widest">
+            Run Calculation
+        </button>
+
+        <div id="runeResultArea" class="hidden mt-8 pt-8 border-t border-slate-100 text-center">
+            <p class="text-slate-400 uppercase text-[10px] font-black tracking-widest mb-1">Total Runes Required</p>
+            <h3 id="runeTotalDisplay" class="text-4xl font-black text-slate-900">0</h3>
+        </div>
+    </div>
+</div>
+
+                <div id="calcModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-6">
+                    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
+                        <button onclick="closeCalc()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                        <div id="elden-ring-app"></div>
+                    </div>
                 </div>
             </div>
 
@@ -146,5 +196,62 @@
     <footer class="py-12 bg-slate-900 text-slate-500 text-center text-xs tracking-widest uppercase font-bold">
         <p>&copy; 2026 Tyler Wu • BUILT FOR GITHUB PAGES</p>
     </footer>
+
+<script>
+    function openRuneCalc() {
+        const modal = document.getElementById('runeModal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeRuneCalc() {
+        const modal = document.getElementById('runeModal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+
+    function calculateRuneInvestment() {
+        const currentLvl = parseInt(document.getElementById('runeCurr').value) || 0;
+        const targetLvl = parseInt(document.getElementById('runeTarget').value) || 0;
+        
+        if (targetLvl <= currentLvl) {
+            alert("Target level must be higher than current level.");
+            return;
+        }
+
+        let totalRunes = 0;
+
+        // Loop to match the Fextralife table logic
+        for (let lvl = currentLvl; lvl < targetLvl; lvl++) {
+            // 1. Calculate the dynamic x for this specific level
+            let x = ((lvl + 81) - 92) * 0.02;
+            
+            // 2. x cannot be below 0
+            if (x < 0) x = 0;
+
+            // 3. Apply your formula: ((x+0.1)*((Lvl+81)^2))+1
+            let cost = ((x + 0.1) * Math.pow((lvl + 81), 2)) + 1;
+            
+            // 4. Round down (Floor) and add to total
+            totalRunes += Math.floor(cost);
+        }
+
+        const resultArea = document.getElementById('runeResultArea');
+        const display = document.getElementById('runeTotalDisplay');
+        
+        resultArea.classList.remove('hidden');
+        display.innerText = totalRunes.toLocaleString();
+    }
+</script><div class="grid grid-cols-2 gap-4 mb-8">
+    <div>
+        <label class="block text-[10px] font-black uppercase text-slate-500 mb-2 tracking-widest">Current Level</label>
+        <input type="number" id="runeCurr" value="1" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 outline-none focus:border-blue-500 transition-all font-bold">
+    </div>
+    <div>
+        <label class="block text-[10px] font-black uppercase text-slate-500 mb-2 tracking-widest">Target Level</label>
+        <input type="number" id="runeTarget" value="150" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-3 outline-none focus:border-blue-500 transition-all font-bold">
+    </div>
+</div>
+
 </body>
 </html>
