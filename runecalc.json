@@ -1,0 +1,19 @@
+{
+  "appName": "Elden Ring Rune Calculator",
+  "version": "1.0.0",
+  "formula": {
+    "description": "Rune Cost = ((x + 0.1) * ((Lvl + 81)^2)) + 1",
+    "baseConstant": 0.1,
+    "scalingFactorX": 0.02,
+    "exponent": 2,
+    "levelOffset": 81
+  },
+  "uiConfig": {
+    "themeColor": "blue-600",
+    "labels": {
+      "currentLevel": "Current Level",
+      "targetLevel": "Target Level",
+      "ctaButton": "Calculate Investment"
+    }
+  }
+}
